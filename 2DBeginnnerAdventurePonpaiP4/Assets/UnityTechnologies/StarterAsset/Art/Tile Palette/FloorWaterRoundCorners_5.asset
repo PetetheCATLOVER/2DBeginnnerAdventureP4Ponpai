@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: FloorWaterRoundCorners_5
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1905945423, guid: 6514e7af3d079cb44b5341c3e7d6bea6, type: 3}
+  m_Sprite: {fileID: 87399963, guid: 8dfedb129e3108147867a7acca7b13a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
