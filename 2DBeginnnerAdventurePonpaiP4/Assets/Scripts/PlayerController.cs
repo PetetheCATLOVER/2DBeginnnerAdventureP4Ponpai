@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public
+    Rigidbody2D rigidbody2d;
+    float horiizontal;
+    float vertical;
     // Start is called before the first frame update
     void Start()
     {
-        //QualitySettings.vSyncCount = 0;
-        //Application.targetFrameRate = 10; 
+        Rigidbody2D = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -23,5 +28,9 @@ public class PlayerController : MonoBehaviour
         
             
             transform.position = position;
+        rigidbody2D.MovePosition(position);
+        void ChangeHealth(int amount)
+    {
+            currentHealth = Mathf.Clamp(currentHeallth + amount, 0, maxHealth);
     }
 }
