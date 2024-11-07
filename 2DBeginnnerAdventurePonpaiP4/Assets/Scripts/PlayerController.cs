@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public
+    public int maxHealth = 5;
+    int currentHealth;
     Rigidbody2D rigidbody2d;
-    float horiizontal;
+    float horizontal;
     float vertical;
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
     }
 
@@ -20,17 +21,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");    
-
+        float vertical = Input.GetAxis("Vertical");
+    }
+     
+    void FixedUpdate()
+    { 
         Vector2 position = transform.position;
         position.x = position.x + 3.0f * horizontal * Time.deltaTime;
         position.y = position.y + 3.0f * vertical * Time.deltaTime;
-        
-            
-            transform.position = position;
-        rigidbody2D.MovePosition(position);
-        void ChangeHealth(int amount)
-    {
-            currentHealth = Mathf.Clamp(currentHeallth + amount, 0, maxHealth);
+
+        rigidbody2d.MovePosition(position);
+    }
+     
+    void ChangeHealth(int amount)
+    { 
+            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+            Debug.Log(currentHealth + "/" + maxHealth);
     }
 }
