@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int maxHealth = 5;
-    int currentHealth;
+    int currentHealth = 3;
     Rigidbody2D rigidbody2d;
     float horizontal;
     float vertical;
@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxis("Horizontal");
+         vertical = Input.GetAxis("Vertical");
     }
      
     void FixedUpdate()
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         rigidbody2d.MovePosition(position);
     }
      
-    void ChangeHealth(int amount)
+     public void ChangeHealth(int amount)
     { 
             currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
             Debug.Log(currentHealth + "/" + maxHealth);
