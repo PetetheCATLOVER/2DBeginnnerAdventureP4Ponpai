@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 3.0f;
     public int maxHealth = 5;
     public int health { get { return currentHealth; } }
-    int currentHealth = 3;
+    int currentHealth = 5;
 
 
     Rigidbody2D rigidbody2d;
