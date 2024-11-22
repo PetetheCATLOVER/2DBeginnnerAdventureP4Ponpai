@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //Varibles related to player character movement 
+    public InputAction InputAction;
+    Rigidbody2D riggidbody2d;
+    Vector2 move;
     public float speed = 3.0f;
+
+    // Varibles relatted to temporary invincibility
+    public float timeInvincible = 2.0f;
+    bool isInvincible;
+    float damageCooldown;
+    
+   // Varibles relatted to the health system
     public int maxHealth = 5;
     public int health { get { return currentHealth; } }
     int currentHealth = 5;
