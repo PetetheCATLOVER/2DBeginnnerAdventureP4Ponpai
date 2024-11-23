@@ -6,24 +6,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    //Varibles related to player character movement 
-    public InputAction InputAction;
-    Rigidbody2D riggidbody2d;
-    Vector2 move;
+    Rigidbody2D rigidbody2d;
     public float speed = 3.0f;
 
-    // Varibles relatted to temporary invincibility
-    public float timeInvincible = 2.0f;
+    public float timeInvincible = 2;
     bool isInvincible;
-    float damageCooldown;
-    
-   // Varibles relatted to the health system
+    float invincibleTimer;
+
     public int maxHealth = 5;
-    public int health { get { return currentHealth; } }
+    public int Health { get { return currentHealth; } }
     int currentHealth = 5;
 
 
-    Rigidbody2D rigidbody2d;
     float horizontal;
     float vertical;
     // Start is called before the first frame update
@@ -36,22 +30,40 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-         vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxis("Horizonntal");
+        vertical = Input.GetAxis("Vertical");
+
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer < 0)
+            {
+                isInvincible = false;
+            }
+        }
     }
 
+    //FixedUpdate has the same call rate as the phycics system
     void FixedUpdate()
-    { 
-        Vector2 position = transform.position;
-        position.x = position.x + 3.0f * horizontal * Time.deltaTime;
-        position.y = position.y + 3.0f * vertical * Time.deltaTime;
-
+    {
+        Vector2 position = (Vector2)rigidbody2d.position;
+        position.x = position.x + speed * horizontal * Time.deltaTime;
+        position.y = position.y + speed * vertical * Time.deltaTime;
         rigidbody2d.MovePosition(position);
     }
-     
-     public void ChangeHealth(int amount)
-    { 
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-            Debug.Log(currentHealth + "/" + maxHealth);
+
+    public void ChangeHealth(int amount)
+    {
+        if (amount < 0)
+        {
+            if (isInvincible)
+            {
+                return;
+
+            }
+            isInvincible = true;
+        }
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        Debug.Log(currentHealth + "/" + maxHealth);
     }
 }
